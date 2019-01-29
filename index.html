@@ -116,7 +116,7 @@
         }
 
         let prediction = await model.detect(canvas)
-        console.log(prediction)
+        prediction = prediction && prediction.filter = prediction.filter(item => item.class === 'cat')
         prediction && prediction.length && context.strokeRect(...prediction[0].bbox)
       }
 
