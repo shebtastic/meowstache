@@ -75,17 +75,15 @@
       })
       .then(stream => {
         video.srcObject = stream
-        video.onloadedmetadata = () => {
-          video.play()
-        }
       })
+      .catch(console.error)
 
       awesomeifyCat = async () => {
         let predictions = (await model.detect(video)).filter(item => item.class === 'cat')
         console.log(predictions)
         context.clearRect(0, 0, canvas.width, canvas.height)
         predictions && predictions.length && predictions.forEach(prediction => context.strokeRect(...prediction.bbox))
-        setTimeout(awesomeifyCat, 100)
+        setTimeout(awesomeifyCat, 250)
         //requestAnimationFrame(awesomeifyCat)
       }
       awesomeifyCat()
