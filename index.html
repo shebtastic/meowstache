@@ -54,10 +54,10 @@
   <script>
 
     window.addEventListener('load', async () => {
-      let model = await cocoSsd.load()
-      let canvas = document.getElementById('canvas')
-      let context = canvas.getContext('2d')
-      let video = document.getElementById('video')
+      const model = await cocoSsd.load()
+      const canvas = document.getElementById('canvas')
+      const context = canvas.getContext('2d')
+      const video = document.getElementById('video')
 
       canvas.width = video.width
       canvas.height = video.height
@@ -79,12 +79,12 @@
       .catch(console.error)
 
       awesomeifyCat = async () => {
-        let predictions = (await model.detect(video)).filter(item => item.class === 'cat')
+        const predictions = (await model.detect(video)).filter(item => item.class === 'cat')
         console.log(predictions)
         context.clearRect(0, 0, canvas.width, canvas.height)
         predictions && predictions.length && predictions.forEach(prediction => context.strokeRect(...prediction.bbox))
-        setTimeout(awesomeifyCat, 250)
-        //requestAnimationFrame(awesomeifyCat)
+        // setTimeout(awesomeifyCat, 250)
+        requestAnimationFrame(awesomeifyCat)
       }
       awesomeifyCat()
 
